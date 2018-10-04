@@ -20,9 +20,26 @@ export const sendFile = (response: Http.ServerResponse, filePath: string, file) 
 export const serveStatic = (res: Http.ServerResponse, cache: Object, absPath: string) => {
     let file = cache[absPath];
     if(!file){
-        file = cache[absPath] = fs.readFileSync(absPath);
+        fs.stat(absPath, (err, stat) => {
+            if(err){
+                res.end("Error no file found\n");
+            }else{
+                if(stat.isFile()){
+                    fs.readFile(absPath, (err,data) => {
+                        if(err){
+                            res.end(err.message + 'error');
+                        }else{
+                            sendFile(res,absPath, data);
+                        }
+                    })
+                }else{
+                    res.end('error');
+                }
+            }
+        })
+    }else {
+        sendFile(res, absPath, file);
     }
-    res.end(file || 'no file found!');
 }
 
 export const pathMap = (url: string = '', path: string, filePath: string) => {

@@ -3,7 +3,10 @@
         "strictNullChecks": true,
         "moduleResolution": "node",
         "outDir": "dist",
-        "sourceMap": true      
+        "sourceMap": true,
+        "lib": [
+            "es6"
+        ]      
     },
     "include":[
         "server/**/*"
