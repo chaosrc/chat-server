@@ -11,6 +11,8 @@ http.createServer((req, res) => {
     let absPath = pathMap(req.url, '/static', path.join(__dirname, 'public'));
     if(absPath){
         serveStatic(res, cache, absPath);
+    }else{
+        handle404(res);
     }
     
 }).listen(8899);

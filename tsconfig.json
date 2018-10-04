@@ -3,7 +3,7 @@
         "strictNullChecks": true,
         "moduleResolution": "node",
         "outDir": "dist",
-        "sourceMap": true
+        "sourceMap": true      
     },
     "include":[
         "server/**/*"

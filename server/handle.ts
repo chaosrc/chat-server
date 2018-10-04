@@ -5,7 +5,7 @@ import * as fs   from 'fs';
 
 export const handle404 = (response: Http.ServerResponse) => {
   response.writeHead(404, { "Content-Type": "text/plain" });
-  response.write("404 not found");
+  response.write("404 not found \n");
   response.end();
 };
 
