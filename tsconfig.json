@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "strictNullChecks": true,
+        "moduleResolution": "node",
+        "outDir": "dist",
+        "sourceMap": true
+    },
+    "include":[
+        "server/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
