@@ -20,23 +20,15 @@ export const sendFile = (response: Http.ServerResponse, filePath: string, file) 
 export const serveStatic = (res: Http.ServerResponse, cache: Object, absPath: string) => {
     let file = cache[absPath];
     if(!file){
-        fs.stat(absPath, (err, stat) => {
+        fs.readFile(absPath, (err,data) => {
             if(err){
-                res.end("Error no file found\n");
+                res.end('file read error\n');
+                console.log(err.message);
             }else{
-                if(stat.isFile()){
-                    fs.readFile(absPath, (err,data) => {
-                        if(err){
-                            res.end(err.message + 'error');
-                        }else{
-                            sendFile(res,absPath, data);
-                        }
-                    })
-                }else{
-                    res.end('error');
-                }
+                sendFile(res,absPath, data);
             }
         })
+      
     }else {
         sendFile(res, absPath, file);
     }

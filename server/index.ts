@@ -1,11 +1,12 @@
 import * as http from 'http';
 import * as path from 'path';
-import * as fs from 'fs';
 import {handle404, sendFile, pathMap, serveStatic} from './handle';
+import { socketListener } from './socket';
+
 
 const cache = {};
 
-http.createServer((req, res) => {
+const server = http.createServer((req, res) => {
     // handle404(res);
     //handle static files
     let absPath = pathMap(req.url, '/static', path.join(__dirname, 'public'));
@@ -15,4 +16,8 @@ http.createServer((req, res) => {
         handle404(res);
     }
     
-}).listen(8899);
+})
+
+socketListener(server);
+
+server.listen(8899);
